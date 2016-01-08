@@ -14,6 +14,14 @@ namespace Floream.People.Modules
         public ProfileModule(PeopleContext people)
         {
             _people = people;
+
+            Get["/Profile"] = parameters => 
+                {
+                    return View["Index"];
+                };
+            //Post["/Profile/UploadPicture"] = parameters => {
+            //    Request.Files
+            //} ;
         }
     }
 }
