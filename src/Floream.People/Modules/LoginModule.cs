@@ -1,5 +1,7 @@
 ﻿using System.Configuration;
 using System.Linq;
+using System.Security.Authentication;
+using System.Web.UI.WebControls;
 using Floream.People.DataSources.Context;
 using Nancy;
 using Nancy.Authentication.Forms;
@@ -12,19 +14,17 @@ namespace Floream.People.Modules
     public class LoginModule : NancyModule
     {
         private readonly PeopleContext _people;
-        private readonly Ldap _ldap;
 
-        public LoginModule(PeopleContext people, Ldap ldap)
+        public LoginModule(PeopleContext people)
         {
             _people = people;
-            _ldap = ldap;
 
             Get["/login"] = parameters =>
             {
                 // Called when the user visits the login page or is redirected here because
                 // an attempt was made to access a restricted resource. It should return
                 // the view that contains the login form
-                return View["login"];
+                return View["Login"];
             };
 
             Get["/logout"] = parameters =>
@@ -51,7 +51,8 @@ namespace Floream.People.Modules
                 }
 
                 // Authenticate user against AD
-                if (!_ldap.IsAuthenticated(ConfigurationManager.AppSettings.Get("ldap-domain"), username, password))
+                var ldap = new LdapAuth(ConfigurationManager.AppSettings.Get("ldap-path"));
+                if (!ldap.IsAuthenticated(ConfigurationManager.AppSettings.Get("ldap-domain"), username, password))
                 {
                     // Add exception to the view
                     // TODO
