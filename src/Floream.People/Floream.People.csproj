@@ -136,6 +136,7 @@
     <Compile Include="FloreamUserMapper.cs" />
     <Compile Include="LdapAuth.cs" />
     <Compile Include="Models\SearchModel.cs" />
+    <Compile Include="Ldap.cs" />
     <Compile Include="Modules\Api.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
