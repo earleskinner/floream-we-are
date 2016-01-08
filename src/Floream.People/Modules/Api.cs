@@ -16,13 +16,14 @@ namespace Floream.People.Modules
         public Api(PeopleContext people)
             : base("/api")
         {
-            this.RequiresAuthentication();
 
             _people = people;
 
-            Get["/person"] = parameters =>
+            Get["/people"] = parameters =>
             {
-                // search people
+                
+                people
+
                 return Negotiate.WithModel(null);
             };
 

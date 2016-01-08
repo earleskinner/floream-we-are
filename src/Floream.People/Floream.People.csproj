@@ -70,6 +70,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\Style.css" />
+    <Content Include="Content\js\jquery.lazyload.min.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\jquery.mixitup.min.js" />
+    <Content Include="Content\js\script.js" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -88,9 +93,10 @@
     <Compile Include="FloreamIdentity.cs" />
     <Compile Include="FloreamUserMapper.cs" />
     <Compile Include="LdapAuth.cs" />
+    <Compile Include="Modules\Api.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
-    <Compile Include="Modules\PersonModule.cs" />
+    <Compile Include="Modules\Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +104,9 @@
       <Project>{A59DEDC7-0F00-436B-A3D5-7D7DAAB20A2E}</Project>
       <Name>Floream.People.DataSources</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Style\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
