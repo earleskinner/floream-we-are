@@ -14,7 +14,7 @@ namespace Floream.People
 
             // Enable forms auth
             FormsAuthentication.Enable(pipelines,
-                new FormsAuthenticationConfiguration()
+                new FormsAuthenticationConfiguration
                 {
                     RedirectUrl = "~/login",
                     UserMapper = container.Resolve<IUserMapper>()

@@ -1,4 +1,7 @@
-﻿using Floream.People.DataSources.Context;
+﻿using System.Configuration;
+using System.Linq;
+using System.Security.Authentication;
+using Floream.People.DataSources.Context;
 using Nancy;
 using Nancy.Authentication.Forms;
 
@@ -9,7 +12,7 @@ namespace Floream.People.Modules
     /// </summary>
     public class LoginModule : NancyModule
     {
-        private PeopleContext _people;
+        private readonly PeopleContext _people;
 
         public LoginModule(PeopleContext people)
         {
@@ -27,7 +30,7 @@ namespace Floream.People.Modules
             {
                 // Called when the user clicks the sign out button in the application. Should
                 // perform one of the Logout actions (see below)
-                return FormsAuthentication.LogOutAndRedirectResponse(Context, "/");
+                return this.LogoutAndRedirect("/");
             };
 
             Post["/login"] = parameters =>
@@ -35,7 +38,23 @@ namespace Floream.People.Modules
                 // Called when the user submits the contents of the login form. Should
                 // validate the user based on the posted form data, and perform one of the
                 // Login actions (see below)
-                return null;
+                var username = (string) Request.Form.username;
+                var password = (string) Request.Form.password;
+
+                var user = _people.People.FirstOrDefault(p => p.AdUser == username && !p.Hidden && !p.Retired);
+                if (user == null)
+                {
+                    throw new AuthenticationException("User cannot be found in the database");
+                }
+
+                // Authenticate user against AD
+                var ldap = new LdapAuth(ConfigurationManager.AppSettings.Get("ldap-path"));
+                if (!ldap.IsAuthenticated(ConfigurationManager.AppSettings.Get("ldap-domain"), username, password))
+                {
+                    throw new AuthenticationException("User is not authenticated with active directory");
+                }
+
+                return this.LoginAndRedirect(user.Id);
             };
         }
     }
