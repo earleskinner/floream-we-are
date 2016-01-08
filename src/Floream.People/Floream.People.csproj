@@ -72,7 +72,7 @@
     <Content Include="Content\JS\jquery.lazyload.min.js" />
     <Content Include="Content\JS\jquery.min.js" />
     <Content Include="Content\JS\jquery.mixitup.min.js" />
-    <Content Include="Content\Style\Style.css" />
+    <Content Include="Content\styles\Style.css" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
