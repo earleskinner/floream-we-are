@@ -21,8 +21,6 @@ namespace Floream.People.Modules
 
             Get["/people"] = parameters =>
             {
-                
-                people
 
                 return Negotiate.WithModel(null);
             };
