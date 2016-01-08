@@ -1,6 +1,5 @@
 ﻿using System.Configuration;
 using System.Linq;
-using System.Security.Authentication;
 using Floream.People.DataSources.Context;
 using Nancy;
 using Nancy.Authentication.Forms;
@@ -13,10 +12,12 @@ namespace Floream.People.Modules
     public class LoginModule : NancyModule
     {
         private readonly PeopleContext _people;
+        private readonly Ldap _ldap;
 
-        public LoginModule(PeopleContext people)
+        public LoginModule(PeopleContext people, Ldap ldap)
         {
             _people = people;
+            _ldap = ldap;
 
             Get["/login"] = parameters =>
             {
@@ -50,8 +51,7 @@ namespace Floream.People.Modules
                 }
 
                 // Authenticate user against AD
-                var ldap = new LdapAuth(ConfigurationManager.AppSettings.Get("ldap-path"));
-                if (!ldap.IsAuthenticated(ConfigurationManager.AppSettings.Get("ldap-domain"), username, password))
+                if (!_ldap.IsAuthenticated(ConfigurationManager.AppSettings.Get("ldap-domain"), username, password))
                 {
                     // Add exception to the view
                     // TODO
