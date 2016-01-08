@@ -17,18 +17,25 @@ namespace Floream.People.Modules
 
             Get["/"] = parameters =>
             {
+                // call when user visit the home page
+                // 
+                //
                 using (PeopleContext context = new PeopleContext())
                 {
                     List<Person> persons = context.People.ToList();
+                    
                 }
 
                 return View["index"];
             };
 
-            Get["/profile/{id}"] = parameters =>
+            Get["/profile/{id:guid}"] = parameters =>
             {
-                // todo
-                return Response.AsJson<Guid>(1);
+                // call when user visit it's own profile
+                // 
+                Guid id = Guid.Parse(parameters.value);
+
+                return Response.AsJson(id);
 
             };
 
