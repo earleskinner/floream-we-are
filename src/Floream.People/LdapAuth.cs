@@ -16,35 +16,27 @@ namespace Floream.People
 
         public bool IsAuthenticated(string domain, string username, string pwd)
         {
-            var domainAndUsername = domain + @"\" + username;
-            var entry = new DirectoryEntry(_path, domainAndUsername, pwd);
-
             try
-            {	//Bind to the native AdsObject to force authentication.			
+            {
+                var domainAndUsername = domain + @"\" + username;
+                var entry = new DirectoryEntry(_path, domainAndUsername, pwd);
 
+                //Bind to the native AdsObject to force authentication.
                 var search = new DirectorySearcher(entry)
                 {
                     Filter = "(SAMAccountName=" + username + ")"
                 };
 
                 search.PropertiesToLoad.Add("cn");
+                search.PropertiesToLoad.Add("mail");
                 var result = search.FindOne();
+                return result != null;
 
-                if (null == result)
-                {
-                    return false;
-                }
-
-                //Update the new path to the user in the directory.
-                _path = result.Path;
-                _filterAttribute = (string)result.Properties["cn"][0];
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception("Error authenticating user. " + ex.Message);
+                return false;
             }
-
-            return true;
         }
 
         public string GetGroups()
