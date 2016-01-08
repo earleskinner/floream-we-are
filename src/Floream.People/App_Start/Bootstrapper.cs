@@ -1,4 +1,5 @@
-﻿using Floream.People.DataSources.Context;
+﻿using System.Configuration;
+using Floream.People.DataSources.Context;
 using Nancy;
 using Nancy.Authentication.Forms;
 using Nancy.Bootstrapper;
@@ -12,6 +13,10 @@ namespace Floream.People
         {
             base.ApplicationStartup(container, pipelines);
 
+            // Register LDAP instance.
+            var ldap = new Ldap(ConfigurationManager.AppSettings.Get("ldap-path"));
+            container.Register(ldap);
+
             // Enable forms auth
             FormsAuthentication.Enable(pipelines,
                 new FormsAuthenticationConfiguration
@@ -22,6 +27,8 @@ namespace Floream.People
             );
 
             // Register new ad user here.
+            var ldapUsers = ldap.GetUsers();
+
         }
 
         protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)

@@ -115,7 +115,7 @@
     <Compile Include="Modules\Api.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
-    <Compile Include="Modules\Profile.cs" />
+    <Compile Include="Modules\ProfileModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RazorConfig.cs" />
   </ItemGroup>

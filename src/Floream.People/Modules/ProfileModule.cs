@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Floream.People.Modules
 {
-    public class Profile : NancyModule
+    public class ProfileModule : NancyModule
     {
         private readonly PeopleContext _people;
 

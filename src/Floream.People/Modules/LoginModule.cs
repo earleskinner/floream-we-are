@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Linq;
 using System.Security.Authentication;
+using System.Web.UI.WebControls;
 using Floream.People.DataSources.Context;
 using Nancy;
 using Nancy.Authentication.Forms;
@@ -13,17 +14,19 @@ namespace Floream.People.Modules
     public class LoginModule : NancyModule
     {
         private readonly PeopleContext _people;
+        private readonly Ldap _ldap;
 
-        public LoginModule(PeopleContext people)
+        public LoginModule(PeopleContext people, Ldap ldap)
         {
             _people = people;
+            _ldap = ldap;
 
             Get["/login"] = parameters =>
             {
                 // Called when the user visits the login page or is redirected here because
                 // an attempt was made to access a restricted resource. It should return
                 // the view that contains the login form
-                return View["login"];
+                return View["Login"];
             };
 
             Get["/logout"] = parameters =>
@@ -44,17 +47,20 @@ namespace Floream.People.Modules
                 var user = _people.People.FirstOrDefault(p => p.AdUser == username && !p.Hidden && !p.Retired);
                 if (user == null)
                 {
-                    throw new AuthenticationException("User cannot be found in the database");
+                    // Add exception to the view
+                    // TODO
+                    return View["login"];
                 }
 
                 // Authenticate user against AD
-                var ldap = new LdapAuth(ConfigurationManager.AppSettings.Get("ldap-path"));
                 if (!ldap.IsAuthenticated(ConfigurationManager.AppSettings.Get("ldap-domain"), username, password))
                 {
-                    throw new AuthenticationException("User is not authenticated with active directory");
+                    // Add exception to the view
+                    // TODO
+                    return View["login"];
                 }
 
-                return this.LoginAndRedirect(user.Id);
+                return this.LoginAndRedirect(user.Id, null, "/profile");
             };
         }
     }
