@@ -5,7 +5,7 @@ namespace Floream.People.DataSources.Entities
     public class Person
     {
 
-        public int PersonId { get; set; }
+        public Guid PersonId { get; set; }
 
         public DateTime Created { get; set; }
 
