@@ -5,8 +5,11 @@ namespace Floream.People.DataSources.Context
 {
     public class PeopleContext : DbContext
     {
+        public PeopleContext() : base("peopleDb")
+        {
+            
+        }
 
-        public DbSet<Person> Persons { get; set; }
-
+        public DbSet<Person> People { get; set; }
     }
 }
