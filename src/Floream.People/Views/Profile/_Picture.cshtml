@@ -1,0 +1,47 @@
+﻿@model string
+
+<h3>Avatar</h3>
+
+<div class="row myInfo">
+    <div class="col-md-12">
+        @*<img class="avatar img-circle resize" id="avatarPic" />*@
+        <img class="avatar resize" id="avatarPic" />
+    </div>
+    <div class="col-md-12" style="padding-top:10px">
+        <input id="fileupload" type="file" name="files[]" hidden="true" style="display:none">
+        <div class="dummySmallSpace"></div>
+        <a id="btnImage" class="btn btn-primary">Show</a>
+        <br />
+        <div class="dummySmallSpace"></div>
+        <a href="#" id="btnOpenFileDialog" onclick="document.getElementById('fileupload').click(); return false;" class=" btn btn-primary">Change Avatar</a>
+    </div>
+</div>
+<script>
+    $('#avatarPic').attr("src", "/Images/secret-santa-ninja.png")
+
+    $(document).ready(function () {
+        $('#fileupload').fileupload({
+            dataType: 'html',
+            cache: false,
+            url: '/Home/UploadPicture/' + $('#UserId').val() + '/' + $('#NickId').val(),
+            autoUpload: true,
+            success: function (result) {
+                debugger;
+                $("#myPic").html(result);
+            }
+        });
+    });
+
+    $('#btnImage').click(function () {
+        debugger;
+        if ($('#btnImage').text() == 'Show') {
+            $('#btnImage').text('Hide');
+            $('#avatarPic').attr("src", "/Images/Avatars/@Model")
+        }
+        else {
+            $('#btnImage').text('Show');
+            $('#avatarPic').attr("src", "/Images/secret-santa-ninja.png")
+        }
+    });
+
+</script>

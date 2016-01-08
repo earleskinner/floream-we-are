@@ -1,0 +1,42 @@
+﻿@model Floream.People.DataSources.Entities.Person
+
+
+<div class="row myInfo">
+    <div class="col-md-12">
+        <img class="avatar resize" id="avatarPic" />
+    </div>
+    <div class="col-md-12" style="padding-top:10px">
+        <input id="fileupload" type="file" name="files[]" hidden="true" style="display:none">
+        <br />
+        <div class="dummySmallSpace"></div>
+        <a href="#" id="btnOpenFileDialog" onclick="document.getElementById('fileupload').click(); return false;" class=" btn btn-primary">Change Picture</a>
+    </div>
+    <div class="col-md-6">
+        <p id="lblName">Name: </p>
+    </div>
+    <div class="col-md-6">
+        <p id="name">@Model.Name</p>
+    </div>
+
+    <div class="col-md-6">
+        <p id="lblPosition">Position: </p>
+    </div>
+    <div class="col-md-6">
+        <p id="name">@Model.Position</p>
+    </div>
+
+    <div class="col-md-6">
+        <p id="lblName">Email: </p>
+    </div>
+    <div class="col-md-6">
+        <p id="name">@Model.Email</p>
+    </div>
+</div>
+
+<script src="/Scripts/vendor/jquery.ui.widget.js"></script>
+<script src="/Scripts/jquery.iframe-transport.js"></script>
+<script src="/Scripts/jquery.fileupload.js"></script>
+
+<script>
+    $('#AvatarPic').attr("src", "/Images/Avatars/@Model.")
+</script>
