@@ -1,27 +1,56 @@
-﻿using Floream.People.DataSources.Context;
+﻿using System;
+using Floream.People.DataSources.Context;
 using Nancy;
-using System;
-using System.Collections.Generic;
+using Nancy.Security;
+using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Web;
 
 namespace Floream.People.Modules
 {
-    public class ProfileModule : NancyModule
+    public class Profile : NancyModule
     {
-        private PeopleContext _people;
+        private readonly PeopleContext _people;
 
-        public ProfileModule(PeopleContext people)
+        public Profile(PeopleContext people)
         {
+            //this.RequiresAuthentication();
+
             _people = people;
 
-            Get["/Profile"] = parameters => 
+            Get["/profile"] = parameters =>
+            {
+                //// call when user visit it's own profile
+                //var identity = Context.CurrentUser as FloreamIdentity;
+
+                var person = new DataSources.Entities.Person
                 {
-                    return View["Index"];
+                    Id = Guid.NewGuid(),
+                    Hidden = false,
+                    Created = DateTime.Now,
+                    Name = "Mauro",
+                    Position = "Developer",
+                    Retired = false
                 };
-            //Post["/Profile/UploadPicture"] = parameters => {
-            //    Request.Files
-            //} ;
+
+                //return View["profile", identity.Person];
+                return View["Profile/Index", person];
+            };
+
+            Post["/Profile/UploadPicture"] = parameters =>
+            {
+                var file = Request.Files.FirstOrDefault();
+                var a = 1;
+                //var identity = Context.CurrentUser as FloreamIdentity;
+                //identity.Person.Picture = file;
+
+                //_people.SaveChanges();
+
+                //src="data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7"
+
+                return null;
+            };
         }
+
     }
 }
