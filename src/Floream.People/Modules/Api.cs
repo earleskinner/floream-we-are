@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Web;
-using System.Web.UI.WebControls;
-using Floream.People.DataSources.Context;
+﻿using Floream.People.DataSources.Context;
 using Floream.People.Enums;
 using Floream.People.Models;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using Nancy.Security;
+using System;
+using System.Linq;
 
 namespace Floream.People.Modules
 {
@@ -56,7 +50,7 @@ namespace Floream.People.Modules
                 }
             }
 
-            var results = query.Select(p => new {p.Name, p.Position})
+            var results = query.Select(p => new { p.Name, p.Position })
                 .ToList();
 
             return Negotiate.WithModel(results);
