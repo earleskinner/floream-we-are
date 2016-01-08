@@ -10,7 +10,7 @@ namespace Floream.People.Modules
 
             Get["/"] = parameters =>
             {
-                return View["home"];
+                return View["index"];
             };
 
         }
