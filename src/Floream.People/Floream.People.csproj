@@ -107,9 +107,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\floream.css" />
+    <Content Include="Content\css\ie10-viewport-bug-workaround.css" />
     <Content Include="Content\css\Style.css" />
+    <Content Include="Content\image\logo.png" />
     <Content Include="Content\image\polaroid.png" />
     <Content Include="Content\image\Tom-Selleck.jpeg" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\ie-emulation-modes-warning.js" />
+    <Content Include="Content\js\ie10-viewport-bug-workaround.js" />
     <Content Include="Content\js\jquery.lazyload.min.js" />
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.mixitup.min.js" />
@@ -117,8 +123,7 @@
     <Content Include="packages.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\index.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Login.cshtml" />
+    <Content Include="Views\login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
