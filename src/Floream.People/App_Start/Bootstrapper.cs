@@ -1,21 +1,24 @@
-﻿using Nancy;
+﻿using Floream.People.DataSources.Context;
+using Nancy;
+using Nancy.Bootstrapper;
 using Nancy.TinyIoc;
 
 namespace Floream.People
 {
     public class Bootstrapper : DefaultNancyBootstrapper
     {
-
-        /// <summary>
-        /// Add container configurations
-        /// </summary>
-        /// <param name="container"></param>
-        /// <param name="context"></param>
-        protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
+        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
-            base.ConfigureRequestContainer(container, context);
+            base.ApplicationStartup(container, pipelines);
 
+            // Register new ad user here.
         }
 
+        protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
+        {
+            base.RequestStartup(container, pipelines, context);
+
+            container.Register(new PeopleContext());
+        }
     }
 }

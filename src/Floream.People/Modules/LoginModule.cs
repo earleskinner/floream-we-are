@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using Floream.People.DataSources.Context;
+using Nancy;
 using Nancy.Authentication.Forms;
 
 namespace Floream.People.Modules
@@ -8,8 +9,12 @@ namespace Floream.People.Modules
     /// </summary>
     public class LoginModule : NancyModule
     {
-        public LoginModule()
+        private PeopleContext _people;
+
+        public LoginModule(PeopleContext people)
         {
+            _people = people;
+
             Get["/login"] = parameters =>
             {
                 // Called when the user visits the login page or is redirected here because

@@ -10,6 +10,6 @@ namespace Floream.People.DataSources.Context
             
         }
 
-        public DbSet<Person> Persons { get; set; }
+        public DbSet<Person> People { get; set; }
     }
 }
