@@ -14,6 +14,8 @@ namespace Floream.People.DataSources.Entities
 
         public string Name { get; set; }
 
+        public string Email { get; set; }
+
         public string Position { get; set; }
 
         public string AdUser { get; set; }

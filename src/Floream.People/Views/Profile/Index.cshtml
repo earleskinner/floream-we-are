@@ -1,5 +1,4 @@
-﻿@model Floream.People.DataSources.Entities.Person
-
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Floream.People.DataSources.Entities.Person>
 
 <div class="row myInfo">
     <div class="col-md-12">
@@ -22,21 +21,21 @@
         <p id="lblPosition">Position: </p>
     </div>
     <div class="col-md-6">
-        <p id="name">@Model.Position</p>
+        <p id="position">@Model.Position</p>
     </div>
 
     <div class="col-md-6">
-        <p id="lblName">Email: </p>
+        <p id="lblEmail">Email: </p>
     </div>
     <div class="col-md-6">
-        <p id="name">@Model.Email</p>
+        <p id="email">@Model.Email</p>
     </div>
 </div>
 
-<script src="/Scripts/vendor/jquery.ui.widget.js"></script>
-<script src="/Scripts/jquery.iframe-transport.js"></script>
-<script src="/Scripts/jquery.fileupload.js"></script>
+<script src="/Content/js//vendor/jquery.ui.widget.js"></script>
+<script src="/Content/js/jquery.iframe-transport.js"></script>
+<script src="/Content/js/jquery.fileupload.js"></script>
 
-<script>
+@*<script>
     $('#AvatarPic').attr("src", "/Images/Avatars/@Model.")
-</script>
+</script>*@
