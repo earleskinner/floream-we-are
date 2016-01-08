@@ -10,24 +10,26 @@ namespace Floream.People.Modules
 {
     public class HomeModule : NancyModule
     {
+        private readonly PeopleContext _people;
 
-        public HomeModule()
+        public HomeModule(PeopleContext people)
         {
             this.RequiresAuthentication();
-            
+
+            _people = people;
 
             Get["/"] = parameters =>
             {
                 // call when user visit the home page
                 // 
                 //
-                using (PeopleContext context = new PeopleContext())
-                {
-                    List<Person> persons = context.People.ToList();
+                //using (PeopleContext context = new PeopleContext())
+                //{
+                //    List<Person> persons = context.People.ToList();
                     
-                }
+                //}
 
-                return View["index"];
+                return View["index", people.People.ToList()];
             };
 
            

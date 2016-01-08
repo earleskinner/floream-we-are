@@ -54,7 +54,7 @@
 				width:100%;
 			}
 			div.overlay{
-				background:url(polaroid.png);
+				background:url(/Content/image/polaroid.png);
 				height:534px;
 				width:414px;
 				position:absolute;
