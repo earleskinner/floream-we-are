@@ -1,11 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Floream.People.DataSources.Entities
 {
     public class Person
     {
-
-        public int PersonId { get; set; }
+        [Key]
+        public Guid Id { get; set; }
 
         public DateTime Created { get; set; }
 
@@ -22,6 +23,5 @@ namespace Floream.People.DataSources.Entities
         public bool Hidden { get; set; }
 
         public byte[] Picture { get; set; }
-        
     }
 }
