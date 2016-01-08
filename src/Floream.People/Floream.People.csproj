@@ -90,9 +90,10 @@
     <Compile Include="App_Start\Bootstrapper.cs" />
     <Compile Include="FloreamIdentity.cs" />
     <Compile Include="FloreamUserMapper.cs" />
+    <Compile Include="Modules\Api.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
-    <Compile Include="Modules\PersonModule.cs" />
+    <Compile Include="Modules\Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
