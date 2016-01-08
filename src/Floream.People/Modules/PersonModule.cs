@@ -19,6 +19,17 @@ namespace Floream.People.Modules
             {
                 return null;
             };
+
+             Get["/profile/{id:guid}"] = parameters =>
+            {
+                // call when user visit it's own profile
+                // 
+                Guid id = Guid.Parse(parameters.value);
+                Context.CurrentUser as FloreamIdentity();
+                return Response.AsJson(id);
+
+            };
+
         }
 
     }

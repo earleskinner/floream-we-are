@@ -4,6 +4,7 @@ using System.Linq;
 using Floream.People.DataSources.Context;
 using Floream.People.DataSources.Entities;
 using Nancy;
+using Nancy.Security;
 
 namespace Floream.People.Modules
 {
@@ -12,7 +13,7 @@ namespace Floream.People.Modules
 
         public HomeModule()
         {
-
+            this.RequiresAuthentication();
             
 
             Get["/"] = parameters =>
@@ -29,15 +30,7 @@ namespace Floream.People.Modules
                 return View["index"];
             };
 
-            Get["/profile/{id:guid}"] = parameters =>
-            {
-                // call when user visit it's own profile
-                // 
-                Guid id = Guid.Parse(parameters.value);
-
-                return Response.AsJson(id);
-
-            };
+           
 
         }
 
