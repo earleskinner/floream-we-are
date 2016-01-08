@@ -1,4 +1,9 @@
-﻿using Nancy;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Floream.People.DataSources.Context;
+using Floream.People.DataSources.Entities;
+using Nancy;
 
 namespace Floream.People.Modules
 {
@@ -8,9 +13,23 @@ namespace Floream.People.Modules
         public HomeModule()
         {
 
+            
+
             Get["/"] = parameters =>
             {
+                using (PeopleContext context = new PeopleContext())
+                {
+                    List<Person> persons = context.Persons.ToList();
+                }
+
                 return View["index"];
+            };
+
+            Get["/profile/{id}"] = parameters =>
+            {
+                // todo
+                return Response.AsJson<Guid>(1);
+
             };
 
         }
