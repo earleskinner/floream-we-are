@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\Style.css" />
+    <Content Include="Content\image\polaroid.png" />
+    <Content Include="Content\image\Tom-Selleck.jpeg" />
     <Content Include="Content\js\jquery.lazyload.min.js" />
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.mixitup.min.js" />
