@@ -12,7 +12,7 @@ namespace Floream.People.Modules
     {
         private readonly PeopleContext _people;
 
-        public Profile(PeopleContext people)
+        public ProfileModule(PeopleContext people)
         {
             //this.RequiresAuthentication();
 

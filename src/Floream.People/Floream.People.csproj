@@ -85,7 +85,7 @@
     <Content Include="Content\css\Style.css" />
     <Content Include="Content\image\polaroid.png" />
     <Content Include="Content\image\Tom-Selleck.jpeg" />
-    <Content Include="Content\js\jquery.fileupload-ui.js" />
+    <Content Include="Content\js\jquery.fileupload.js" />
     <Content Include="Content\js\jquery.iframe-transport.js" />
     <Content Include="Content\js\jquery.lazyload.min.js" />
     <Content Include="Content\js\jquery.min.js" />
@@ -95,6 +95,9 @@
     <Content Include="packages.config" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\_Picture.cshtml" />
+    <Content Include="Views\index.cshtml" />
+    <Content Include="Views\Login.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -103,15 +106,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\index.html" />
-    <Content Include="Views\login.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Bootstrapper.cs" />
     <Compile Include="FloreamIdentity.cs" />
     <Compile Include="FloreamUserMapper.cs" />
-    <Compile Include="LdapAuth.cs" />
+    <Compile Include="Ldap.cs" />
     <Compile Include="Modules\Api.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />

@@ -1,4 +1,9 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Floream.People.DataSources.Entities.Person>
+﻿@{
+    ViewBag.Title = "Profile";
+    Layout = "Views/Shared/_Layout.cshtml";
+}
+
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Floream.People.DataSources.Entities.Person>
 
 <div class="row myInfo">
     <div class="col-md-12">
