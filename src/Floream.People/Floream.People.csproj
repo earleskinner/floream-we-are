@@ -90,9 +90,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Bootstrapper.cs" />
+    <Compile Include="Enums\Sort.cs" />
     <Compile Include="FloreamIdentity.cs" />
     <Compile Include="FloreamUserMapper.cs" />
     <Compile Include="LdapAuth.cs" />
+    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Modules\Api.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />

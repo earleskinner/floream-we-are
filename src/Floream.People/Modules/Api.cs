@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web;
+using System.Web.UI.WebControls;
 using Floream.People.DataSources.Context;
+using Floream.People.Enums;
+using Floream.People.Models;
 using Nancy;
+using Nancy.ModelBinding;
+using Nancy.Responses.Negotiation;
 using Nancy.Security;
 
 namespace Floream.People.Modules
@@ -19,12 +25,41 @@ namespace Floream.People.Modules
 
             _people = people;
 
-            Get["/people"] = parameters =>
+            Get["/people"] = Search;
+
+        }
+
+        private Negotiator Search(dynamic parameters)
+        {
+            // search people
+            SearchModel searchModel = this.Bind();
+
+            var query = _people.People.AsQueryable();
+
+            if (searchModel != null)
             {
+                if (!string.IsNullOrWhiteSpace(searchModel.q))
+                {
+                    string[] tokens = searchModel.q.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                return Negotiate.WithModel(null);
-            };
+                    query = query.Where(p => tokens.All(t => p.Name.Contains(t)));
+                }
 
+                switch (searchModel.sort)
+                {
+                    case Sort.Descending:
+                        query = query.OrderByDescending(p => p.Name);
+                        break;
+                    default:
+                        query = query.OrderBy(p => p.Name);
+                        break;
+                }
+            }
+
+            var results = query.Select(p => new {p.Name, p.Position})
+                .ToList();
+
+            return Negotiate.WithModel(results);
         }
 
     }
