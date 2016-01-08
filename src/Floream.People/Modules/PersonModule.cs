@@ -15,7 +15,7 @@ namespace Floream.People.Modules
         {
             _peopleContext = peopleContext;
 
-            Get["person"] = parameters =>
+            Get["/person"] = parameters =>
             {
                 return null;
             };
