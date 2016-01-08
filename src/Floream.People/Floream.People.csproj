@@ -51,6 +51,7 @@
     <Reference Include="Nancy.Hosting.Aspnet">
       <HintPath>..\packages\Nancy.Hosting.Aspnet.1.4.1\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -69,6 +70,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\Style.css" />
+    <Content Include="Content\js\jquery.lazyload.min.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\jquery.mixitup.min.js" />
+    <Content Include="Content\js\script.js" />
     <Content Include="packages.config" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\_Picture.cshtml" />
@@ -88,9 +94,11 @@
     <Compile Include="App_Start\Bootstrapper.cs" />
     <Compile Include="FloreamIdentity.cs" />
     <Compile Include="FloreamUserMapper.cs" />
+    <Compile Include="LdapAuth.cs" />
+    <Compile Include="Modules\Api.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
-    <Compile Include="Modules\PersonModule.cs" />
+    <Compile Include="Modules\Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +106,9 @@
       <Project>{A59DEDC7-0F00-436B-A3D5-7D7DAAB20A2E}</Project>
       <Name>Floream.People.DataSources</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Style\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
