@@ -19,7 +19,7 @@ namespace Floream.People.Modules
             {
                 using (PeopleContext context = new PeopleContext())
                 {
-                    List<Person> persons = context.Persons.ToList();
+                    List<Person> persons = context.People.ToList();
                 }
 
                 return View["index"];
