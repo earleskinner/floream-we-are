@@ -7,22 +7,19 @@ namespace Floream.People.Modules
 {
     public class Profile : NancyModule
     {
-        private readonly PeopleContext _peopleContext;
+        private readonly PeopleContext _people;
 
-        public Profile(PeopleContext peopleContext)
+        public Profile(PeopleContext people)
         {
             this.RequiresAuthentication();
 
-            _peopleContext = peopleContext;
+            _people = people;
 
-
-
-         Get["/profile"] = parameters =>
+            Get["/profile"] = parameters =>
             {
                 // call when user visit it's own profile
-                // 
-           
                 var identity = Context.CurrentUser as FloreamIdentity;
+
                 return View["profile", identity.Person];
 
             };
