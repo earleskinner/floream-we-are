@@ -13,9 +13,6 @@ namespace Floream.People.Modules
 
         public HomeModule()
         {
-            this.RequiresAuthentication();
-            
-
             Get["/"] = parameters =>
             {
                 // call when user visit the home page
