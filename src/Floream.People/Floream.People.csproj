@@ -72,12 +72,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\home.html" />
+    <Content Include="Views\index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Floream.People.DataSources\Floream.People.DataSources.csproj">
+      <Project>{a59dedc7-0f00-436b-a3d5-7d7daab20a2e}</Project>
+      <Name>Floream.People.DataSources</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
