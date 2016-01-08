@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Linq;
 using System.Security.Authentication;
+using System.Web.UI.WebControls;
 using Floream.People.DataSources.Context;
 using Nancy;
 using Nancy.Authentication.Forms;
@@ -23,7 +24,7 @@ namespace Floream.People.Modules
                 // Called when the user visits the login page or is redirected here because
                 // an attempt was made to access a restricted resource. It should return
                 // the view that contains the login form
-                return View["login"];
+                return View["Login"];
             };
 
             Get["/logout"] = parameters =>
