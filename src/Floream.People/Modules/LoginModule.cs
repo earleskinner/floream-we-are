@@ -26,7 +26,7 @@ namespace Floream.People.Modules
                 // Called when the user visits the login page or is redirected here because
                 // an attempt was made to access a restricted resource. It should return
                 // the view that contains the login form
-                return View["Login"];
+                return View["login"];
             };
 
             Get["/logout"] = parameters =>
