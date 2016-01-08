@@ -45,17 +45,21 @@ namespace Floream.People.Modules
                 var user = _people.People.FirstOrDefault(p => p.AdUser == username && !p.Hidden && !p.Retired);
                 if (user == null)
                 {
-                    throw new AuthenticationException("User cannot be found in the database");
+                    // Add exception to the view
+                    // TODO
+                    return View["login"];
                 }
 
                 // Authenticate user against AD
                 var ldap = new LdapAuth(ConfigurationManager.AppSettings.Get("ldap-path"));
                 if (!ldap.IsAuthenticated(ConfigurationManager.AppSettings.Get("ldap-domain"), username, password))
                 {
-                    throw new AuthenticationException("User is not authenticated with active directory");
+                    // Add exception to the view
+                    // TODO
+                    return View["login"];
                 }
 
-                return this.LoginAndRedirect(user.Id);
+                return this.LoginAndRedirect(user.Id, null, "/profile");
             };
         }
     }
