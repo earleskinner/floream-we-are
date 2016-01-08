@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI.WebControls;
 using Floream.People.DataSources.Context;
 using Floream.People.DataSources.Entities;
 using Nancy;
@@ -14,8 +15,7 @@ namespace Floream.People.Modules
 
         public HomeModule(PeopleContext people)
         {
-            this.RequiresAuthentication();
-
+            
             _people = people;
 
             Get["/"] = parameters =>
@@ -29,7 +29,7 @@ namespace Floream.People.Modules
                     
                 //}
 
-                return View["index", people.People.ToList()];
+                return View["index", _people.People.ToList()];
             };
 
            
