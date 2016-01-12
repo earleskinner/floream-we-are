@@ -4,6 +4,8 @@ With over 150 employees and quickly growing at Floream, as developers, it's hard
 
 Hope you enjoy our little project @ http://weare.floream.com
 
+**Thanks to:** Mauro, Adulai, Ben, Kaori, MJ and Earle
+
 ## Development Instructions
 
 Create a database called ```wearefloream``` and start the application. It should automatically create the required tables.
