@@ -1,11 +1,12 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace Floream.People.DataSources.Entities
+namespace Floream.People.Models
 {
-    public class Person
+    public class PersonProfile
     {
-        [Key]
         public Guid Id { get; set; }
 
         public DateTime Created { get; set; }

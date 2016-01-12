@@ -1,4 +1,4 @@
-﻿@model string
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Floream.People.DataSources.Entities.Person>
 
 <h3>Avatar</h3>
 
@@ -14,14 +14,21 @@
         <a href="#" id="btnOpenFileDialog" onclick="document.getElementById('fileupload').click(); return false;" class=" btn btn-primary">Change Avatar</a>
     </div>
 </div>
+@if (Model.Picture != null) { 
+<script>
+    $('#avatarPic').attr("src", "data:image/@Model.PictureExtension;base64,@System.Convert.ToBase64String(Model.Picture)")
+</script>
+}
 <script>
     $(document).ready(function () {
+        debugger;
         $('#fileupload').fileupload({
             dataType: 'html',
             cache: false,
-            url: '/Home/UploadPicture/' + $('#Id').val() + '/' + $('#NickId').val(),
+            url: '/Profile/UploadPicture/',
             autoUpload: true,
             success: function (result) {
+                debugger;
                 $("#myPic").html(result);
             }
         });

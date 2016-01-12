@@ -5,6 +5,9 @@ using Nancy.Security;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using Floream.People.Models;
+using Floream.People.DataSources.Entities;
+using Floream.People.Utils;
 
 namespace Floream.People.Modules
 {
@@ -14,41 +17,41 @@ namespace Floream.People.Modules
 
         public ProfileModule(PeopleContext people)
         {
-            //this.RequiresAuthentication();
+            this.RequiresAuthentication();
 
             _people = people;
 
             Get["/profile"] = parameters =>
             {
-                //// call when user visit it's own profile
-                //var identity = Context.CurrentUser as FloreamIdentity;
+                // call when user visit it's own profile
+                var identity = Context.CurrentUser as FloreamIdentity;
 
-                var person = new DataSources.Entities.Person
+                if (identity.Person.Picture == null)
                 {
-                    Id = Guid.NewGuid(),
-                    Hidden = false,
-                    Created = DateTime.Now,
-                    Name = "Mauro",
-                    Position = "Developer",
-                    Retired = false
-                };
+                    identity.Person.Picture = Convert.FromBase64String(Constants.picStormTrooper);
+                    identity.Person.PictureExtension = "jpg";
+                }
 
-                //return View["profile", identity.Person];
-                return View["Profile/Index", person];
+                return View["Profile/Index", identity.Person];
             };
 
             Post["/Profile/UploadPicture"] = parameters =>
             {
                 var file = Request.Files.FirstOrDefault();
                 var a = 1;
-                //var identity = Context.CurrentUser as FloreamIdentity;
-                //identity.Person.Picture = file;
 
-                //_people.SaveChanges();
+                var identity = Context.CurrentUser as FloreamIdentity;
+                identity.Person.PictureExtension = file.ContentType.Split('/')[1];
 
-                //src="data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7"
+                MemoryStream memStream = new MemoryStream();
+                file.Value.CopyTo(memStream);
+                var array = memStream.ToArray();
 
-                return null;
+                identity.Person.Picture = array;                
+                
+                _people.SaveChanges();                
+                
+                return View["Profile/_Picture", identity.Person];
             };
         }
 

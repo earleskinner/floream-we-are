@@ -1,73 +1,39 @@
-﻿@{
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<List<Floream.People.Models.PersonProfile>>
+
+@{
     ViewBag.Title = "Home Page ";
     Layout = "Views/Shared/_Layout.cshtml";
+    var counter = 0;
 }
 
-    <div class="controls">
-        <label>Filter:</label>
-        <button class="filter" data-filter="all">All</button>
-        <button class="filter" data-filter=".sales">Sales Team</button>
-        <button class="filter" data-filter=".it">It Department</button>
-        <label>Sort:</label>
-        <button class="sort" data-sort="myorder:asc">Asc</button>
-        <button class="sort" data-sort="myorder:desc">Desc</button>
-    </div>
-    <div id="container">
+<div class="controls">
+    <label>Filter:</label>
+    <button class="filter" data-filter="all">All</button>
+    <button class="filter" data-filter=".sales">Sales Team</button>
+    <button class="filter" data-filter=".it">It Department</button>
+    <label>Sort:</label>
+    <button class="sort" data-sort="myorder:asc">Asc</button>
+    <button class="sort" data-sort="myorder:desc">Desc</button>
+</div>
+<div id="container">
 
-        <div class="col mix sales col-md-4" data-myorder="1">
-            <div class="wrapper">
-                <div class="img"><img src="/Content/image/Tom-Selleck.jpeg"></div>
-                <div class="overlay"></div>
-                <span>
-                    Tom Selleck 1<br />
-                    Sales Person<br />
-                    Sales Team
-                </span>
+    @foreach (var item in Model)
+    {
+    <div class="col mix @item.Department col-md-4" data-myorder="@counter">
+        <div class="wrapper">
+            <div class="img">
+                <img src="data:image/@item.PictureExtension;base64,@System.Convert.ToBase64String(item.Picture)" />
             </div>
-        </div>
-        <div class="col mix sales" data-myorder="2">
-            <div class="wrapper">
-                <div class="img"><img src="/Content/image/Tom-Selleck.jpeg"></div>
-                <div class="overlay"></div>
-                <span>
-                    Tom Selleck 2<br />
-                    Sales Person<br />
-                    Sales Team
-                </span>
-            </div>
-        </div>
-        <div class="col mix it" data-myorder="3">
-            <div class="wrapper">
-                <div class="img"><img src="/Content/image/Tom-Selleck.jpeg"></div>
-                <div class="overlay"></div>
-                <span>
-                    Tom Selleck 3<br />
-                    Sales Person<br />
-                    Sales Team
-                </span>
-            </div>
-        </div>
-        <div class="col mix it" data-myorder="4">
-            <div class="wrapper">
-                <div class="img"><img src="/Content/image/Tom-Selleck.jpeg"></div>
-                <div class="overlay"></div>
-                <span>
-                    Tom Selleck 4<br />
-                    Sales Person<br />
-                    Sales Team
-                </span>
-            </div>
-        </div>
-        <div class="col mix sales" data-myorder="5">
-            <div class="wrapper">
-                <div class="img"><img src="/Content/image/Tom-Selleck.jpeg"></div>
-                <div class="overlay"></div>
-                <span>
-                    Tom Selleck 5<br />
-                    Sales Person<br />
-                    Sales Team
-                </span>
-            </div>
+            <div class="overlay"></div>
+            <span>
+                @item.Name<br />
+                <a href="mailto:@item.Email"></a><br />
+                @item.Position<br />
+                @item.Department<br />
+            </span>
         </div>
     </div>
+        counter++;
+    }
 
+</div>
