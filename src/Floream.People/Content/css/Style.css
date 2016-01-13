@@ -23,7 +23,7 @@
 				content:">";
 				
 			}
-			.container .col{
+			#container .col{
 				display: none;
 			}
 			.col {

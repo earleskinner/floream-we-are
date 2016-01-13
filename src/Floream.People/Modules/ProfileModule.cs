@@ -8,6 +8,7 @@ using System.Linq;
 using Floream.People.Models;
 using Floream.People.DataSources.Entities;
 using Floream.People.Utils;
+using System.Drawing.Imaging;
 
 namespace Floream.People.Modules
 {
@@ -41,18 +42,61 @@ namespace Floream.People.Modules
                 var a = 1;
 
                 var identity = Context.CurrentUser as FloreamIdentity;
-                identity.Person.PictureExtension = file.ContentType.Split('/')[1];
+
+                var imageType = file.ContentType.Split('/')[1];
 
                 MemoryStream memStream = new MemoryStream();
-                file.Value.CopyTo(memStream);
+                //Resize the image
+                Bitmap bmp = ScaleImage(Image.FromStream(file.Value), 125, 125);
+                //Save the resized image to a Stream
+                var imageFormatConverter = new ImageFormatConverter();
+                bmp.Save(memStream, (ImageFormat)imageFormatConverter.ConvertFromString(imageType));                    
                 var array = memStream.ToArray();
 
-                identity.Person.Picture = array;                
-                
-                _people.SaveChanges();                
-                
-                return View["Profile/_Picture", identity.Person];
+                var dbPeople = _people.People.FirstOrDefault(p => p.Id == identity.Person.Id);
+                dbPeople.PictureExtension = imageType;
+                dbPeople.Picture = array;
+                _people.SaveChanges();
+
+                identity.Person.Picture = array;
+                identity.Person.PictureExtension = imageType;
+                Context.CurrentUser = identity;
+
+                return View["Profile/_Picture", dbPeople];
             };
+        }
+
+        /// <summary>
+        /// Scales an image proportionally.  Returns a bitmap.
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="maxWidth"></param>
+        /// <param name="maxHeight"></param>
+        /// <returns></returns>
+        private Bitmap ScaleImage(Image image, int maxWidth, int maxHeight)
+        {
+            double ratio;
+            if(image.Width > image.Height)
+                ratio = (double)maxWidth / image.Width;
+            else
+                ratio = (double)maxHeight / image.Height;
+                        
+            var newWidth = (int)(image.Width * ratio);
+            var newHeight = (int)(image.Height * ratio);
+
+            var newImage = new Bitmap(newWidth, newHeight);
+            Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
+            Bitmap bmp = new Bitmap(newImage);
+
+            return bmp;
+        }
+
+        private Image GetImageFromByteArray(byte[] bytes)
+        {
+            using (var ms = new MemoryStream(bytes))
+            {
+                return Image.FromStream(ms);
+            }
         }
 
     }
