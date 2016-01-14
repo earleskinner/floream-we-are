@@ -85,6 +85,8 @@
     <Content Include="Content\css\floream.css" />
     <Content Include="Content\css\ie10-viewport-bug-workaround.css" />
     <Content Include="Content\css\Style.css" />
+    <Content Include="Content\image\default_avatar_150px.png" />
+    <Content Include="Content\image\default_avatar_300px.png" />
     <Content Include="Content\image\logo.png" />
     <Content Include="Content\image\polaroid.png" />
     <Content Include="Content\image\Tom-Selleck.jpeg" />
@@ -129,6 +131,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RazorConfig.cs" />
     <Compile Include="Utils\Constants.cs" />
+    <Compile Include="Utils\HtmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Floream.People.DataSources\Floream.People.DataSources.csproj">

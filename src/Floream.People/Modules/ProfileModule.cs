@@ -27,12 +27,6 @@ namespace Floream.People.Modules
                 // call when user visit it's own profile
                 var identity = Context.CurrentUser as FloreamIdentity;
 
-                if (identity.Person.Picture == null)
-                {
-                    identity.Person.Picture = Convert.FromBase64String(Constants.picStormTrooper);
-                    identity.Person.PictureExtension = "jpg";
-                }
-
                 return View["Profile/Index", identity.Person];
             };
 
@@ -64,6 +58,20 @@ namespace Floream.People.Modules
 
                 return View["Profile/_Picture", dbPeople];
             };
+
+            Post["/Profile/Save"] = parameters =>
+            {
+                var identity = Context.CurrentUser as FloreamIdentity;
+
+                var dbPeople = _people.People.FirstOrDefault(p => p.Id == identity.Person.Id);
+                dbPeople.Position = Request.Form.position; ;
+                _people.SaveChanges();
+
+                identity.Person.Position = Request.Form.position;
+
+                return Request.Form.position;
+            };
+
         }
 
         /// <summary>

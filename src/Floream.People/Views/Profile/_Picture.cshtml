@@ -1,35 +1,40 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Floream.People.DataSources.Entities.Person>
+﻿@using Floream.People.Utils;
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Floream.People.DataSources.Entities.Person>
 
 <h3>Avatar</h3>
 
-<div class="row myInfo">
+<div class="row">
     <div class="col-md-12">
-        @*<img class="avatar img-circle resize" id="avatarPic" />*@
-        <img class="avatar resize" id="avatarPic" />
+        <img id="avatarPic" src="@HtmlHelper.GetProfileImage(Model.Picture, Model.PictureExtension)" />
+        <br />
+        <div id='avatarSuccessMessage' style="display:none;">Picture updated successfully!</div>
     </div>
     <div class="col-md-12" style="padding-top:10px">
         <input id="fileupload" type="file" name="files[]" hidden="true" style="display:none">
         <br />
-        <div class="dummySmallSpace"></div>
         <a href="#" id="btnOpenFileDialog" onclick="document.getElementById('fileupload').click(); return false;" class=" btn btn-primary">Change Avatar</a>
     </div>
 </div>
-@if (Model.Picture != null) { 
-<script>
-    $('#avatarPic').attr("src", "data:image/@Model.PictureExtension;base64,@System.Convert.ToBase64String(Model.Picture)")
-</script>
-}
-<script>
+
+<script type="text/javascript">
+    $('#avatarPic').attr("src", '@HtmlHelper.GetProfileImage(Model.Picture, Model.PictureExtension)')
+
     $(document).ready(function () {
-        debugger;
         $('#fileupload').fileupload({
             dataType: 'html',
             cache: false,
             url: '/Profile/UploadPicture/',
             autoUpload: true,
             success: function (result) {
-                debugger;
                 $("#myPic").html(result);
+                
+                $('#avatarSuccessMessage').fadeIn(2000);
+                window.setTimeout(function () {
+                    // closing the popup
+                    $('#avatarSuccessMessage').fadeTo(300, 0.5).slideUp(2000, function () {
+                        $('#avatarSuccessMessage').alert('close');
+                    });
+                }, 5000);
             }
         });
     });

@@ -28,17 +28,22 @@
         </div>
 
         <div class="col-md-6">
-            <p id="lblPosition">Position: </p>
-        </div>
-        <div class="col-md-6">
-            <p id="position">@Model.Position</p>
-        </div>
-
-        <div class="col-md-6">
             <p id="lblEmail">Email: </p>
         </div>
         <div class="col-md-6">
             <p id="email">@Model.Email</p>
+        </div>
+
+        <div class="col-md-6">
+            <p id="lblPosition">Position: </p>
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="position" value="@Model.Position" />
+            @*<p id="position">@Model.Position</p>*@
+        </div>
+        <div class="col-md-6">
+            <input type="button" id="btnSave" value="Save" />
+            <div id='saveSuccessMessage' style="display:none;">Profile updated successfully!</div>
         </div>
     </div>
 </div>
@@ -46,9 +51,25 @@
 <script src="/Content/js/jquery.iframe-transport.js"></script>
 <script src="/Content/js/jquery.fileupload.js"></script>
 
-@if (Model.Picture != null)
-{
-    <script>
-        $('#avatarPic').attr("src", "data:image/@Model.PictureExtension;base64,@System.Convert.ToBase64String(Model.Picture)")
-    </script>
-}
+<script type="text/javascript">
+    $('#avatarPic').attr("src", '@Floream.People.Utils.HtmlHelper.GetProfileImage(Model.Picture, Model.PictureExtension)')
+
+    $('#btnSave').click(function () {
+        $.ajax({
+            url: '/Profile/Save/',
+            type: 'Post',
+            data: {
+                position: $('#position').val()
+            },
+            success: function (data) {
+                $('#saveSuccessMessage').fadeIn(2000);
+                window.setTimeout(function () {
+                    // closing the popup
+                    $('#saveSuccessMessage').fadeTo(300, 0.5).slideUp(2000, function () {
+                        $('#saveSuccessMessage').alert('close');
+                    });
+                }, 5000);
+            }
+        });
+    });
+</script>
