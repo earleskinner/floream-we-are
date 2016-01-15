@@ -6,18 +6,18 @@
     var counter = 0;
 }
 @*
-<br /><br /><br /><br /><br />
-<div class="controls">
-    <label>Filter:</label>
-    <button class="filter" data-filter="all">All</button>
-    <button class="filter" data-filter=".SALES">Sales Team</button>
-    <button class="filter" data-filter=".IT">It Department</button>
-    <button class="filter" data-filter=".FINANCE">Finance</button>
-    <button class="filter" data-filter=".HR">HR</button>
-    <button class="filter" data-filter=".LEARNING">Learning</button>
-    <label>Sort:</label>
-    <button class="sort" data-sort="myorder:asc">Asc</button>
-    <button class="sort" data-sort="myorder:desc">Desc</button>
+    <br /><br /><br /><br /><br />
+    <div class="controls">
+        <label>Filter:</label>
+        <button class="filter" data-filter="all">All</button>
+        <button class="filter" data-filter=".SALES">Sales Team</button>
+        <button class="filter" data-filter=".IT">It Department</button>
+        <button class="filter" data-filter=".FINANCE">Finance</button>
+        <button class="filter" data-filter=".HR">HR</button>
+        <button class="filter" data-filter=".LEARNING">Learning</button>
+        <label>Sort:</label>
+        <button class="sort" data-sort="myorder:asc">Asc</button>
+        <button class="sort" data-sort="myorder:desc">Desc</button>
 *@
 
 <div class="search">
@@ -30,42 +30,42 @@
         </div>
     </form>
 
-@*</div>*@
+    @*</div>*@
 
-<ul class="polaroids list-unstyled list-inline">
-    @foreach (var item in Model)
-    {
-    @*<div class="col mix @item.Department col-md-4" data-myorder="@counter">
-        <div class="wrapper">
-            <div class="img">
-                <img src="@(String.IsNullOrEmpty(item.PictureExtension) ? "/Content/image/default_avatar_150px.png" : String.Format("data:image/{0};base64,{1}",item.PictureExtension,Convert.ToBase64String(item.Picture)))" />
-            </div>
-            <div class="overlay"></div>
-            <span>
-                @item.Name<br />
-                <a href="mailto:@item.Email">@item.Email</a><br />
-                @item.Position<br />
-                @item.Department<br />
-            </span>
-        </div>
-    </div>
-        counter++;*@
-        <li>
-            <a href="#">
-                @if (item.Picture == null)
-                {
-                    <img alt="@item.Name" src="data:image/jpg;base64,@Constants.picStormTrooper" />
-                }
-                else
-                {
-                    <img alt="@item.Name" src="data:image/@item.PictureExtension;base64,@System.Convert.ToBase64String(item.Picture)" />
-                }
-            </a>
-            <span class="text-center">@item.Name
-			<a href="mailto:@item.Email">@item.Email</a><br />
-                @item.Position<br />
-                @item.Department<br />
-				</span>
-        </li>
-    }
-</ul>
+    <ul class="polaroids list-unstyled list-inline">
+        @foreach (var item in Model)
+        {
+            @*<div class="col mix @item.Department col-md-4" data-myorder="@counter">
+                    <div class="wrapper">
+                        <div class="img">
+                            <img src="@(String.IsNullOrEmpty(item.PictureExtension) ? "/Content/image/default_avatar_150px.png" : String.Format("data:image/{0};base64,{1}",item.PictureExtension,Convert.ToBase64String(item.Picture)))" />
+                        </div>
+                        <div class="overlay"></div>
+                        <span>
+                            @item.Name<br />
+                            <a href="mailto:@item.Email">@item.Email</a><br />
+                            @item.Position<br />
+                            @item.Department<br />
+                        </span>
+                    </div>
+                </div>
+                    counter++;*@
+            <li>
+                <a href="#">
+                    <img alt="@item.Name" src='@Floream.People.Utils.HtmlHelper.GetProfileImage(item.Picture, item.PictureExtension)' />
+                </a>
+                <span class="text-center">
+                    @item.Name
+                </span>
+                <span class="text-center">
+                    <a href="mailto:@item.Email">@item.Email</a>
+                </span>
+                <span class="text-center">
+                    @item.Position<br />
+                </span>
+                <span class="text-center">
+                    @item.Department
+                </span>
+            </li>
+        }
+    </ul>
