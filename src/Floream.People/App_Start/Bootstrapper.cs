@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Linq;
 using Floream.People.DataSources.Context;
 using Nancy;
 using Nancy.Authentication.Forms;
@@ -34,8 +35,16 @@ namespace Floream.People
         protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
         {
             base.RequestStartup(container, pipelines, context);
+            var ppl = new PeopleContext();
+            container.Register(ppl);
 
-            container.Register(new PeopleContext());
+            // Fake user.
+            var fake = ppl.People.First();
+            context.CurrentUser = new FloreamIdentity
+            {
+                UserName = fake.AdUser,
+                Person = fake
+            };
         }
     }
 }

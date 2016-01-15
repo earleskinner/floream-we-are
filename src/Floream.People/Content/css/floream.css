@@ -1067,7 +1067,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -3085,26 +3085,26 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #48626e;
+  border-color: #354146;
 }
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
-  background-color: #286090;
-  border-color: #122b40;
+  background-color: #374D56;
+  border-color: #2F393E;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #374D56;
+  border-color: #2F393E;
 }
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #374D56;
+  border-color: #2F393E;
 }
 .btn-primary:active:hover,
 .btn-primary.active:hover,
@@ -4307,11 +4307,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 768px) {
   .navbar-nav {
-    float: left;
+    float: right;
     margin: 0;
   }
   .navbar-nav > li {
-    float: left;
+    float: right;
   }
   .navbar-nav > li > a {
     padding-top: 25px;
@@ -4464,7 +4464,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #999;
+  color: #81c341;
   background-color: transparent;
 }
 .navbar-default .navbar-nav > .active > a,
@@ -4480,14 +4480,14 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: transparent;
 }
 .navbar-default .navbar-toggle {
-  border-color: #ddd;
+  //border-color: #ddd;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #ddd;
+  background-color: #81c341;
 }
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #888;
+  background-color: #fefefe;
 }
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
@@ -6695,15 +6695,16 @@ html {
   min-height: 100%;
 }
 body {
+  /* Padding top by nav height */
+  padding-top: 70px;
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 70px;
+  background-image: url('/content/images/bg.jpg');
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
   background-color: #48626e;
   color: #fff;
   padding: 10px;
@@ -6711,16 +6712,68 @@ body {
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
-body > .container {
-  padding: 60px 15px 0;
+.navbar {
+  padding: 0 20px;
+  background-color: #48626e;
 }
-.container .text-muted {
-  margin: 20px 0;
+#navbar {
+  margin:0 -20px;
+  overflow:hidden;
+  background-color: #48626e;
 }
-.footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
+.navbar-default .navbar-toggle {
+  margin-right:0;
 }
-code {
-  font-size: 80%;
+.login-form {
+  margin-top:100px;
+  padding: 20px;
+}
+@media (max-width: 767px) {
+  .login-form {
+    margin-top:50px;
+  }
+}
+.login-form .btn {
+  margin:30px 0 20px;
+}
+@media (min-width: 768px) {
+  #query {
+    height:52px;
+    font-size:21px;
+  }
+  .search .btn-search {
+    height:52px;
+    font-size:21px;
+  }
+}
+.search {
+  margin: 20px 20px;
+}
+
+ul.polaroids > li {
+    background: #fff;
+    display: inline;
+    float: left;
+    margin: 0 40px 30px 40px;
+    width: auto;
+    padding: 10px 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+}
+
+/* Add drop shadows and smooth out the transition (Safari only) */
+ul.polaroids a {
+  cursor: default;
+  display:block;
+  margin-bottom: 10px;
+}
+
+ul.polaroids p.small-text {
+    text-transform: uppercase;
+    font-size: 12px;
 }

@@ -1,18 +1,18 @@
 ﻿@using Floream.People.Utils;
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Floream.People.DataSources.Entities.Person>
 
-<h3>Avatar</h3>
-
-<div class="row">
-    <div class="col-md-12">
-        <img id="avatarPic" src="@HtmlHelper.GetProfileImage(Model.Picture, Model.PictureExtension)" />
-        <br />
-        <div id='avatarSuccessMessage' style="display:none;">Picture updated successfully!</div>
-    </div>
-    <div class="col-md-12" style="padding-top:10px">
-        <input id="fileupload" type="file" name="files[]" hidden="true" style="display:none">
-        <br />
-        <a href="#" id="btnOpenFileDialog" onclick="document.getElementById('fileupload').click(); return false;" class=" btn btn-primary">Change Avatar</a>
+<div class="avatar">
+    <div class="row">
+        <div class="col-md-12">
+            <img id="avatarPic" />
+			<div id='avatarSuccessMessage' style="display:none;">Picture updated successfully!</div>
+        </div>
+        <div class="col-md-12" style="padding-top: 10px">
+            <input id="fileupload" type="file" name="files[]" hidden="true" style="display: none">
+            <br />
+            <div class="dummySmallSpace"></div>
+            <a href="#" id="btnOpenFileDialog" onclick="document.getElementById('fileupload').click(); return false;" class=" btn btn-primary">Change Avatar</a>
+        </div>
     </div>
 </div>
 

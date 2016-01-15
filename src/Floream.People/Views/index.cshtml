@@ -1,10 +1,11 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<List<Floream.People.Models.PersonProfile>>
+﻿@using Floream.People.Utils
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<List<Floream.People.DataSources.Entities.Person>>
 
 @{
-    ViewBag.Title = "Home Page ";
     Layout = "Views/Shared/_Layout.cshtml";
     var counter = 0;
 }
+@*
 <br /><br /><br /><br /><br />
 <div class="controls">
     <label>Filter:</label>
@@ -17,12 +18,24 @@
     <label>Sort:</label>
     <button class="sort" data-sort="myorder:asc">Asc</button>
     <button class="sort" data-sort="myorder:desc">Desc</button>
-</div>
-<div id="container">
+*@
 
+<div class="search">
+    <form method="POST" action="/search">
+        <div class="input-group">
+            <input type="text" class="form-control" name="query" id="query" placeholder="Search for someone&hellip;">
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-search" type="submit"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </form>
+
+@*</div>*@
+
+<ul class="polaroids list-unstyled list-inline">
     @foreach (var item in Model)
     {
-    <div class="col mix @item.Department col-md-4" data-myorder="@counter">
+    @*<div class="col mix @item.Department col-md-4" data-myorder="@counter">
         <div class="wrapper">
             <div class="img">
                 <img src="@(String.IsNullOrEmpty(item.PictureExtension) ? "/Content/image/default_avatar_150px.png" : String.Format("data:image/{0};base64,{1}",item.PictureExtension,Convert.ToBase64String(item.Picture)))" />
@@ -36,7 +49,23 @@
             </span>
         </div>
     </div>
-        counter++;
+        counter++;*@
+        <li>
+            <a href="#">
+                @if (item.Picture == null)
+                {
+                    <img alt="@item.Name" src="data:image/jpg;base64,@Constants.picStormTrooper" />
+                }
+                else
+                {
+                    <img alt="@item.Name" src="data:image/@item.PictureExtension;base64,@System.Convert.ToBase64String(item.Picture)" />
+                }
+            </a>
+            <span class="text-center">@item.Name
+			<a href="mailto:@item.Email">@item.Email</a><br />
+                @item.Position<br />
+                @item.Department<br />
+				</span>
+        </li>
     }
-
-</div>
+</ul>
