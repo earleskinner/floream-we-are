@@ -5,8 +5,6 @@ using Nancy.Security;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using Floream.People.Models;
-using Floream.People.DataSources.Entities;
 using Floream.People.Utils;
 using System.Drawing.Imaging;
 
@@ -39,15 +37,12 @@ namespace Floream.People.Modules
             Post["/Profile/UploadPicture"] = parameters =>
             {
                 var file = Request.Files.FirstOrDefault();
-                var a = 1;
-
                 var identity = Context.CurrentUser as FloreamIdentity;
-
                 var imageType = file.ContentType.Split('/')[1];
 
                 MemoryStream memStream = new MemoryStream();
                 //Resize the image
-                Bitmap bmp = ScaleImage(Image.FromStream(file.Value), 125, 125);
+                Bitmap bmp = ScaleImage(Image.FromStream(file.Value), 277, 277);
                 //Save the resized image to a Stream
                 var imageFormatConverter = new ImageFormatConverter();
                 bmp.Save(memStream, (ImageFormat)imageFormatConverter.ConvertFromString(imageType));                    
