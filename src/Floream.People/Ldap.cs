@@ -61,5 +61,32 @@ namespace Floream.People
                 return null;
             }
         }
+
+        public SearchResult GetUser(string username)
+        {
+            try
+            {
+                var entry = new DirectoryEntry(_path);
+
+                //Bind to the native AdsObject to force authentication.
+                var search = new DirectorySearcher(entry)
+                {
+                    Filter = "(SAMAccountName=" + username + ")"
+                };
+
+                search.PropertiesToLoad.Add("title");
+                search.PropertiesToLoad.Add("displayName");
+                search.PropertiesToLoad.Add("mail");
+                search.PropertiesToLoad.Add("department");
+
+                SearchResult result = search.FindOne();
+
+                return result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

@@ -3,6 +3,8 @@ using System.Linq;
 using Floream.People.DataSources.Context;
 using Nancy;
 using Nancy.Authentication.Forms;
+using Floream.People.DataSources.Entities;
+using System;
 
 namespace Floream.People.Modules
 {
@@ -27,7 +29,7 @@ namespace Floream.People.Modules
                 return View["login"];
             };
 
-            Get["/logout"] = parameters =>
+            Get["/logoff"] = parameters =>
             {
                 // Called when the user clicks the sign out button in the application. Should
                 // perform one of the Logout actions (see below)
@@ -52,6 +54,21 @@ namespace Floream.People.Modules
                 if (user == null)
                 {
                     // TODO - Create user, because already ldap authed.
+                    var newUser = ldap.GetUser(username);
+
+                    user = new Person
+                    {
+                        Id = Guid.NewGuid(),
+                        AdUser = username,
+                        Created = DateTime.Now,
+                        Department = newUser.Properties["department"][0].ToString(),
+                        Email = newUser.Properties["mail"][0].ToString(),
+                        Name = newUser.Properties["displayName"][0].ToString(),
+                        Position = newUser.Properties["title"][0].ToString()
+                    };
+
+                    user = _people.People.Add(user);
+                    _people.SaveChanges();
                 }
 
                 return this.LoginAndRedirect(user.Id, null, "/profile");

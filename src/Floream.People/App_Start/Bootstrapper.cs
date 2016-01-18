@@ -39,12 +39,12 @@ namespace Floream.People
             container.Register(ppl);
 
             // Fake user.
-            var fake = ppl.People.First();
-            context.CurrentUser = new FloreamIdentity
-            {
-                UserName = fake.AdUser,
-                Person = fake
-            };
+            //var fake = ppl.People.First();
+            //context.CurrentUser = new FloreamIdentity
+            //{
+            //    UserName = fake.AdUser,
+            //    Person = fake
+            //};
         }
     }
 }

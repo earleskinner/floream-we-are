@@ -35,11 +35,19 @@ namespace Floream.People.Modules
                 var imageType = file.ContentType.Split('/')[1];
 
                 MemoryStream memStream = new MemoryStream();
-                //Resize the image
-                Bitmap bmp = ScaleImage(Image.FromStream(file.Value), 277, 277);
-                //Save the resized image to a Stream
-                var imageFormatConverter = new ImageFormatConverter();
-                bmp.Save(memStream, (ImageFormat)imageFormatConverter.ConvertFromString(imageType));                    
+
+                var img = Image.FromStream(file.Value);
+                if (img.Height > 150 || img.Width > 150)
+                {
+                    //Resize the image
+                    Bitmap bmp = ScaleImage(img, 150, 150);
+                    //Save the resized image to a Stream
+                    var imageFormatConverter = new ImageFormatConverter();
+                    bmp.Save(memStream, (ImageFormat)imageFormatConverter.ConvertFromString(imageType));
+                }
+                else
+                    img.Save(memStream, img.RawFormat);
+                     
                 var array = memStream.ToArray();
 
                 var dbPeople = _people.People.FirstOrDefault(p => p.Id == identity.Person.Id);
@@ -59,7 +67,7 @@ namespace Floream.People.Modules
                 var identity = Context.CurrentUser as FloreamIdentity;
 
                 var dbPeople = _people.People.FirstOrDefault(p => p.Id == identity.Person.Id);
-                dbPeople.Position = Request.Form.position; ;
+                dbPeople.Position = Request.Form.position;
                 _people.SaveChanges();
 
                 identity.Person.Position = Request.Form.position;

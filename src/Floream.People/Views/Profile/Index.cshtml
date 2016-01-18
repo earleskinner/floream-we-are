@@ -4,37 +4,36 @@
 }
 
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Floream.People.DataSources.Entities.Person>
-
-<div id="container">
+<div id="container" style="margin-top: 5%;text-align: center;">
     <div class="row myInfo">
-        <div class="col-md-12" id="myPic">
+        <div class="col-md-12" id="myPic" style="margin-bottom: 2%;">
             @Html.Partial("_Picture", Model)
         </div>
         <br />
         <br />
         <br />
-        <div class="col-md-6">
+        @*<div class="col-md-6" style="text-align: right;">
             <p id="lblName">Name: </p>
-        </div>
-        <div class="col-md-6">
+        </div>*@
+        <div class="col-md-12 text-center" style="text-align: center;">
             <p id="name">@Model.Name</p>
         </div>
 
-        <div class="col-md-6">
+        @*<div class="col-md-6" style="text-align: right;">
             <p id="lblEmail">Email: </p>
-        </div>
-        <div class="col-md-6">
+        </div>*@
+        <div class="col-md-12 text-center" style="text-align: center;">
             <p id="email">@Model.Email</p>
         </div>
 
-        <div class="col-md-6">
+        @*<div class="col-md-6" style="text-align: right;">
             <p id="lblPosition">Position: </p>
+        </div>*@
+        <div class="col-md-12 text-center">
+            <input type="text" class="profile-position" placeholder="What's your current possition?" id="position" value="@Model.Position" />
         </div>
-        <div class="col-md-6">
-            <input type="text" id="position" value="@Model.Position" />
-        </div>
-        <div class="col-md-6">
-            <input type="button" id="btnSave" value="Save" />
+        <div class="col-md-12" style="margin-top: 2%;">
+            <input type="button" class="btn btn-primary" id="btnSave" value="Save" style="text-align: center;" />
             <div id='saveSuccessMessage' style="display:none;">Profile updated successfully!</div>
         </div>
     </div>
