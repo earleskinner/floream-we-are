@@ -1,6 +1,6 @@
 # We Are Floream
 
-With over 150 employees and quickly growing at Floream, as developers, it's hard to keep track of who's who. So we have created a website as part of our Floream Dev Day to help us and others quickly put a face to the name.
+With over 250 employees and quickly growing at Floream, as developers, it's hard to keep track of who's who. So we have created a website as part of our Floream Dev Day to help us and others quickly put a face to the name.
 
 Hope you enjoy our little project @ http://weare.floream.com
 
