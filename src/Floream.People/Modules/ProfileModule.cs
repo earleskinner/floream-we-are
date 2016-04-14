@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using Floream.People.DataSources.Context;
 using Nancy;
 using Nancy.Security;
@@ -24,57 +25,56 @@ namespace Floream.People.Modules
             {
                 // call when user visit it's own profile
                 var identity = Context.CurrentUser as FloreamIdentity;
+                var user = _people.People.FirstOrDefault(p => p.AdUser == identity.UserName);
 
-                return View["Profile/Index", identity.Person];
+                return View["profile", user];
             };
 
-            Post["/Profile/UploadPicture"] = parameters =>
+            Post["/profile/upload"] = parameters =>
             {
                 var file = Request.Files.FirstOrDefault();
+                if (file == null)
+                {
+                    return new Response().WithStatusCode(HttpStatusCode.BadRequest);
+                }
+                
                 var identity = Context.CurrentUser as FloreamIdentity;
                 var imageType = file.ContentType.Split('/')[1];
+                var imageHeight = int.Parse(ConfigurationManager.AppSettings.Get("profile-image-height"));
+                var imageWidth = int.Parse(ConfigurationManager.AppSettings.Get("profile-image-width"));
 
-                MemoryStream memStream = new MemoryStream();
-
+                var memStream = new MemoryStream();
                 var img = Image.FromStream(file.Value);
-                if (img.Height > 150 || img.Width > 150)
+                if (img.Height > imageHeight || img.Width > imageWidth)
                 {
-                    //Resize the image
-                    Bitmap bmp = ScaleImage(img, 150, 150);
-                    //Save the resized image to a Stream
+                    // Resize the image
+                    var bmp = ScaleImage(img, imageWidth, imageHeight);
+                    // Save the resized image to a stream
                     var imageFormatConverter = new ImageFormatConverter();
-                    bmp.Save(memStream, (ImageFormat)imageFormatConverter.ConvertFromString(imageType));
+                    var imageObj = imageFormatConverter.ConvertFromString(imageType);
+                    if (imageObj != null)
+                    {
+                        bmp.Save(memStream, (ImageFormat) imageObj);
+                    }
                 }
                 else
+                {
                     img.Save(memStream, img.RawFormat);
+                }
                      
                 var array = memStream.ToArray();
 
-                var dbPeople = _people.People.FirstOrDefault(p => p.Id == identity.Person.Id);
-                dbPeople.PictureExtension = imageType;
-                dbPeople.Picture = array;
-                _people.SaveChanges();
+                // Update the user's profile
+                var user = _people.People.FirstOrDefault(p => p.AdUser == identity.UserName);
+                if (user != null)
+                {
+                    user.PictureExtension = imageType;
+                    user.Picture = array;
+                    _people.SaveChanges();
+                }
 
-                identity.Person.Picture = array;
-                identity.Person.PictureExtension = imageType;
-                Context.CurrentUser = identity;
-
-                return View["Profile/_Picture", dbPeople];
+                return Response.AsText(HtmlHelper.GetProfileImage(array, imageType));
             };
-
-            Post["/Profile/Save"] = parameters =>
-            {
-                var identity = Context.CurrentUser as FloreamIdentity;
-
-                var dbPeople = _people.People.FirstOrDefault(p => p.Id == identity.Person.Id);
-                dbPeople.Position = Request.Form.position;
-                _people.SaveChanges();
-
-                identity.Person.Position = Request.Form.position;
-
-                return Request.Form.position;
-            };
-
         }
 
         /// <summary>

@@ -8184,8 +8184,18 @@ body {
     padding: 20px;
 }
 
+.profile-panel {
+    margin-top: 100px;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-panel .displayname {
+    margin-top: 30px;
+}
+
 @media (max-width: 767px) {
-    .login-form {
+    .login-form, .profile-panel {
         margin-top: 50px;
     }
 }
@@ -8210,29 +8220,31 @@ body {
     margin: 20px 20px;
 }
 
-ul.polaroids > li {
+.polaroids {
+    margin-top: 20px;
+}
+
+.polaroids .polariod {
     background: #fff;
-    display: inline;
-    float: left;
-    margin: 0 35px 25px 35px;
     padding: 10px 10px 15px;
     text-align: center;
     text-decoration: none;
     color: #333;
-    font-size: 18px;
+    font-size: 14px;
     box-shadow: 0 3px 6px rgba(0,0,0,.25);
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
     -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    margin-bottom: 10px;
 }
 
 /* Add drop shadows and smooth out the transition (Safari only) */
-ul.polaroids a {
+.polaroids a {
     cursor: default;
     display: block;
     margin-bottom: 10px;
 }
 
-ul.polaroids p.small-text {
+.polaroids .small-text {
     text-transform: uppercase;
     font-size: 12px;
 }
@@ -8240,4 +8252,19 @@ ul.polaroids p.small-text {
 .profile-position {
     min-width: 270px;
     text-align: center;
+}
+
+.avatar .picture {
+    margin-bottom: 30px;
+}
+
+#pictureupload {
+    display: none;
+}
+
+.mailme {
+    text-transform: lowercase;
+}
+.img-max {
+    width:100%
 }

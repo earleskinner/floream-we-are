@@ -1,0 +1,11 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Floream.People.DataSources.Entities.Person>
+@{
+    ViewBag.Title = "Profile ";
+    Layout = "Views/Shared/_Layout.cshtml";
+}
+
+<div class="profile-panel">
+    @Html.Partial("Shared/_Picture", Model)
+    <p class="displayname">@Model.Name</p>
+    <p>@Model.Email</p>
+</div>

@@ -20,10 +20,10 @@ namespace Floream.People
         {
             var person = _people.People.FirstOrDefault(p => p.Id == identifier);
             if (person == null) return null;
+
             var user = new FloreamIdentity
             {
-                UserName = person.AdUser,
-                Person = person
+                UserName = person.AdUser
             };
             return user;
         }

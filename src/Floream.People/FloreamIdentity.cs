@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Floream.People.DataSources.Entities;
 
 namespace Floream.People
 {
@@ -7,6 +6,5 @@ namespace Floream.People
     {
         public string UserName { get; set; }
         public IEnumerable<string> Claims { get; set; }
-        public Person Person { get; set; }
     }
 }

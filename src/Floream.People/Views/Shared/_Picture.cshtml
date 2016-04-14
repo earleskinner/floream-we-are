@@ -1,0 +1,30 @@
+﻿@using Floream.People.Utils;
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Floream.People.DataSources.Entities.Person>
+
+<div class="avatar">
+    <div>
+        <img class="picture" />
+    </div>
+    <div>
+        <input id="pictureupload" type="file" name="files[]">
+        <a href="#" class="btn btn-primary btn-submit">Change Avatar</a>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('.avatar .picture').attr("src", '@HtmlHelper.GetProfileImage(Model.Picture, Model.PictureExtension)');
+        $('.avatar .btn-submit').click(function(e) {
+            e.preventDefault();
+            $('#pictureupload').click();
+        });
+        $('#pictureupload').fileupload({
+            dataType: 'html',
+            cache: false,
+            url: '/profile/upload/',
+            autoUpload: true,
+            success: function (result) {
+                $('.avatar .picture').attr("src", result);
+            }
+        });
+    });
+</script>

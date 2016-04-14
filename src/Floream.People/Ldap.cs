@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.DirectoryServices;
-using Floream.People.DataSources.Entities;
+﻿using System.DirectoryServices;
 
 namespace Floream.People
 {
@@ -74,10 +70,8 @@ namespace Floream.People
                     Filter = "(SAMAccountName=" + username + ")"
                 };
 
-                search.PropertiesToLoad.Add("title");
-                search.PropertiesToLoad.Add("displayName");
                 search.PropertiesToLoad.Add("mail");
-                search.PropertiesToLoad.Add("department");
+                search.PropertiesToLoad.Add("displayName");
 
                 SearchResult result = search.FindOne();
 

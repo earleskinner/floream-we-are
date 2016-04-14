@@ -84,13 +84,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\floream.css" />
-    <Content Include="Content\css\ie10-viewport-bug-workaround.css" />
-    <Content Include="Content\css\Style.css" />
     <Content Include="Content\image\default_avatar_150px.png" />
     <Content Include="Content\image\default_avatar_300px.png" />
-    <Content Include="Content\image\logo.png" />
-    <Content Include="Content\image\polaroid.png" />
-    <Content Include="Content\image\Tom-Selleck.jpeg" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\js\jquery.fileupload.js" />
@@ -100,10 +95,9 @@
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.mixitup.min.js" />
     <Content Include="Content\js\script.js" />
-    <Content Include="Content\js\vendor\jquery.ui.widget.js" />
+    <Content Include="Content\js\jquery.ui.widget.js" />
     <Content Include="packages.config" />
-    <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Profile\_Picture.cshtml" />
+    <Content Include="Views\Shared\_Picture.cshtml" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login.cshtml" />
@@ -113,6 +107,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Views\Profile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -124,10 +119,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\Bootstrapper.cs" />
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="FloreamIdentity.cs" />
     <Compile Include="FloreamUserMapper.cs" />
-    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Ldap.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />

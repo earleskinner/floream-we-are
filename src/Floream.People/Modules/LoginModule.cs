@@ -45,7 +45,7 @@ namespace Floream.People.Modules
                 var password = (string) Request.Form.password;
 
                 // Authenticate user against AD
-                if (!ldap.IsAuthenticated(ConfigurationManager.AppSettings.Get("ldap-domain"), username, password))
+                if (!_ldap.IsAuthenticated(ConfigurationManager.AppSettings.Get("ldap-domain"), username, password))
                 {
                     return View["login", "Unable to validate your account. Please contact the dev team at dev@floream.com"];
                 }
@@ -53,20 +53,16 @@ namespace Floream.People.Modules
                 var user = _people.People.FirstOrDefault(p => p.AdUser == username && !p.Hidden && !p.Retired);
                 if (user == null)
                 {
-                    // TODO - Create user, because already ldap authed.
+                    // User was not found in the database, register the ad user.
                     var newUser = ldap.GetUser(username);
-
                     user = new Person
                     {
                         Id = Guid.NewGuid(),
                         AdUser = username,
                         Created = DateTime.Now,
-                        Department = newUser.Properties["department"][0].ToString(),
                         Email = newUser.Properties["mail"][0].ToString(),
-                        Name = newUser.Properties["displayName"][0].ToString(),
-                        Position = newUser.Properties["title"][0].ToString()
+                        Name = newUser.Properties["displayName"][0].ToString()
                     };
-
                     user = _people.People.Add(user);
                     _people.SaveChanges();
                 }

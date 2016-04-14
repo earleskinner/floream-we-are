@@ -16,10 +16,6 @@ namespace Floream.People.DataSources.Entities
 
         public string Email { get; set; }
 
-        public string Position { get; set; }
-
-        public string Department { get; set; }
-
         public string AdUser { get; set; }
 
         public bool Retired { get; set; }
